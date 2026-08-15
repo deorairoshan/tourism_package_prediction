@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import LabelEncoder as label_encoder
+from sklearn.preprocessing import LabelEncoder
 
 # loading data from repository
 df = pd.read_csv("tourism_package_prediction/data/tourism.csv")
@@ -30,6 +30,8 @@ df['Gender'] = df['Gender'].replace('Fe Male', 'Female')
 
 # Fixing marital status inconsistency for 'Unmarried and Single'
 df['MaritalStatus'] = df['MaritalStatus'].replace('Unmarried', 'Single')
+
+label_encoder = LabelEncoder()
 
 # Encoding categorical columns using label encoder
 for col in categorical_cols:
