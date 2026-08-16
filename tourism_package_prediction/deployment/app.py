@@ -8,12 +8,7 @@ model_path = os.path.join(os.path.dirname(__file__), "tourism_package_prediction
 model = joblib.load(model_path)
 
 st.title("Tourism Package Prediction")
-st.write("""
-This application predicts the likelihood of a customer purchasing the Tourism Package.
-Enter customer details to get a prediction.
-""")
-
-st.write("Please enter the customer details")
+st.write("Please enter the customer details:")
 
 Age = st.number_input("Age", min_value=18, max_value=100, value=30)
 TypeofContact = st.selectbox("Type of Contact", ["Company Invited", "Self Inquiry"])
@@ -28,7 +23,7 @@ PreferredPropertyStar = st.selectbox("Preferred Property Star",[1, 2, 3, 4, 5])
 MaritalStatus = st.selectbox("Marital Status",["Single", "Married", "Divorced"])
 NumberOfTrips = st.number_input("Number of Trips (per year)",min_value=0, max_value=50, value=2)
 Passport = st.selectbox("Has Passport?", ["Yes", "No"])
-PitchSatisfactionScore = st.slider("Pitch Satisfaction Score",min_value=1, max_value=5, value=3)
+PitchSatisfactionScore = st.number_input("Pitch Satisfaction Score",min_value=1, max_value=5, value=3)
 OwnCar = st.selectbox("Owns a Car?", ["Yes", "No"])
 NumberOfChildrenVisiting = st.number_input("Number of Children Visiting",min_value=0, max_value=5, value=0)
 Designation = st.selectbox("Designation",["Executive", "Manager", "Senior Manager", "VP"])
@@ -55,7 +50,7 @@ input_data = pd.DataFrame([{
     "MonthlyIncome": MonthlyIncome,
 }])
 
-if st.button("Predict Failure"):
+if st.button("Predict"):
     prediction_proba = model.predict_proba(input_data)[0, 1]
     prediction = (prediction_proba >= 0.5).astype(int)
 
