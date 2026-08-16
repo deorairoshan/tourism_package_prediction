@@ -42,18 +42,24 @@ The dataset contains customer and interaction data that serve as key attributes 
 
 ```
 tourism_package_prediction/
+│
 ├── .github/
-│   └── pipeline.yml                                     # GitHub Actions CI/CD workflow
+│   └── workflows
+│       └── pipeline.yml                                 # GitHub Actions CI/CD workflow
+│
 ├── data/
 │   └── tourism.csv                                      # Original dataset
+│
 ├── deployment/
 │   ├── app.py                                           # Streamlit web application
 │   ├── tourism_package_prediction_model_v1.joblib       # Serialized model file
 │   └── requirements.txt                                 # Deployment dependencies
+│
 ├── model_building/
 │   ├── data_register.py                                 # Dataset registration script
-│   ├── data_prepare                                     # Data preprocessing script
+│   ├── data_prepare.py                                  # Data preprocessing script
 │   └── train.py                                         # Model training with MLflow tracking
+│
 └── requirements.txt                                     # Workflow dependencies
 ```
 
