@@ -10,6 +10,7 @@ model = joblib.load(model_path)
 st.title("Tourism Package Prediction")
 st.write("Please enter the customer details:")
 
+# Creating UI form to fetch customer data
 Age = st.number_input("Age", min_value=18, max_value=100, value=30)
 TypeofContact = st.selectbox("Type of Contact", ["Company Invited", "Self Inquiry"])
 CityTier = st.selectbox("City Tier", [1, 2, 3])
@@ -50,11 +51,13 @@ input_data = pd.DataFrame([{
     "MonthlyIncome": MonthlyIncome,
 }])
 
+classification_threshold = 0.45
+
 if st.button("Predict"):
     prediction_proba = model.predict_proba(input_data)[0, 1]
-    prediction = (prediction_proba >= 0.5).astype(int)
-
+    prediction = int(prediction_proba >= classification_threshold)
+    st.metric("Purchase Probability",f"{prediction_proba:.2%}")
     if prediction == 1:
         st.success("The customer is likely to purchase the package.")
     else:
-        st.error("The customer is unlikely to purchase the package.")    
+        st.warning("The customer is unlikely to purchase the package.")    
